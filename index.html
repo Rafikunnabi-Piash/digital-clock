@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #0a192f;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+        .name {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+        .date-container {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+        }
+        .clock-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 400px;
+            height: 180px;
+            background: #112d4e;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+            padding: 20px;
+        }
+        .clock {
+            font-size: 6rem;
+            font-weight: bold;
+            color: #00ffff;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="name">Rafikunnabi Piash</div>
+    <div class="date-container" id="dateDisplay"></div>
+    <div class="clock-container">
+        <div class="clock" id="digitalClock"></div>
+    </div>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // Get hours, minutes, and seconds
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('digitalClock').textContent = `${hours}:${minutes}:${seconds}`;
+
+            // Get date and day
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const day = days[now.getDay()];
+            const date = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            document.getElementById('dateDisplay').textContent = `${day}, ${date}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
